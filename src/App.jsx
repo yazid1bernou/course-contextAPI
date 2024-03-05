@@ -1,17 +1,19 @@
 import { useState , useContext } from 'react'
 import Navbar from './components/Navbar';
-import {GlobalContext} from "./contextAPI/Global"
+import Input from './components/Input';
+import {GlobalContext} from "./contextAPI/Global";
+
 function App() {
   
  
-  const {product , setProduct } =  useContext(GlobalContext);
+  const {product} =  useContext(GlobalContext);
 
   return (
     <>
       <Navbar />
 
       <h2> The title is : {product}</h2>
-      <input type="text" onChange={(e) => setProduct(e.target.value)} /> 
+      <Input />
 
     </>
   )

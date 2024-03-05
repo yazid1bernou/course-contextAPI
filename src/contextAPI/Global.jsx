@@ -5,7 +5,9 @@ export const GlobalContext = createContext();
 const Global = ({children}) => {
 
     const [product , setProduct] = useState("T-shirt") ;
-    return <GlobalContext.Provider value={{product , setProduct}}>
+    const [name , setName] = useState("adem");
+
+    return <GlobalContext.Provider value={{product , setProduct , name}}>
          {children}
 
     </GlobalContext.Provider>
