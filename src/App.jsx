@@ -2,11 +2,13 @@ import { useState , useContext } from 'react'
 import Navbar from './components/Navbar';
 import Input from './components/Input';
 import {GlobalContext} from "./contextAPI/Global";
+import { BsEyeFill , BsEyeSlashFill } from "react-icons/bs";
 
 function App() {
   
  
   const {product} =  useContext(GlobalContext);   
+  const [show , setShow] =  useState(true);
 
   return (
     <>
@@ -21,10 +23,11 @@ function App() {
              <div>
               <h5>All products</h5>
              </div>
-             <button className='btn btn-primary'> Eye icon</button>
+             <button className='btn btn-primary' onClick={()=> setShow(!show)}>{show ? <BsEyeFill /> : <BsEyeSlashFill />}</button>
           </div>
           <div className=''>
                {/* --------- Form ---------------------*/}
+               {show && (
                <form>
                     <div class="mb-3">
                       <label  class="form-label">Title</label>
@@ -45,6 +48,7 @@ function App() {
                    
                    <button type="submit" class="btn btn-primary">Submit</button>
                </form>
+               )}
                {/* ------------ Display All products -------------*/}
               <table class="table">
                     <thead class="table-light">
