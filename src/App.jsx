@@ -2,16 +2,16 @@ import { useState , useContext, useEffect } from 'react'
 import Navbar from './components/Navbar';
 import Input from './components/Input';
 import {GlobalContext} from "./contextAPI/Global";
-import { BsEyeFill , BsEyeSlashFill } from "react-icons/bs";
+import { BsEyeFill , BsEyeSlashFill , BsFillTrash3Fill } from "react-icons/bs";
 
 function App() {
   
  
-  const {products , fetchAllProducts} =  useContext(GlobalContext);   
+  const {products , fetchAllProducts , DeleteProduct } =  useContext(GlobalContext);    
   const [show , setShow] =  useState(true);
   
   useEffect( () => {
-      fetchAllProducts
+     fetchAllProducts
   } , [])
   return (
     <>
@@ -33,19 +33,19 @@ function App() {
                {show && (
                <form>
                     <div class="mb-3">
-                      <label  class="form-label">Title</label>
+                      <label  className="form-label">Title</label>
                       <input type="text" class="form-control" />
                    </div>
                    <div class="mb-3">
-                      <label  class="form-label">Description</label>
+                      <label  className="form-label">Description</label>
                       <input type="text" class="form-control" />
                    </div>
                    <div class="mb-3">
-                      <label  class="form-label">Price</label>
+                      <label  className="form-label">Price</label>
                       <input type="text" class="form-control" />
                    </div>
                    <div class="mb-3">
-                      <label  class="form-label">Image</label>
+                      <label  className="form-label">Image</label>
                       <input type="text" class="form-control" />
                    </div>
                    
@@ -65,15 +65,15 @@ function App() {
                       </tr>
                     </thead>
                     <tbody>
-                    {products?.map(({title , description , price , image}) => {
+                    {products?.map(({id , title , description , price , image}) => {
                             return (
-                             <tr>
-                                <td>1</td>
+                             <tr key={id}>
+                                <td>{id}</td>
                                 <td>{title}</td>
                                 <td>{description}</td>
                                 <td>{price}</td>
                                 <td><img src={image} style={{ width : "50px"}} /></td>
-                                <td><button type="button" class="btn btn-danger">Delete</button></td> 
+                                <td><button className='btn btn-danger' onClick={() =>DeleteProduct(id)}> <BsFillTrash3Fill /></button></td> 
                              </tr>
                             )
 

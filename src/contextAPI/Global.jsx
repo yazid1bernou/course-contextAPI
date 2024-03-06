@@ -6,11 +6,16 @@ const Global = ({children}) => {
 
     const [products , setProducts] = useState([]) ;
     const [name , setName] = useState("adem");
-    const fetchAllProducts = fetch('https://fakestoreapi.com/products')
+    const fetchAllProducts =  
+                             fetch('https://fakestoreapi.com/products')
                              .then(res=>res.json())
                              .then(json=>setProducts(json));
     
-    return <GlobalContext.Provider value={{products , setProducts , name , fetchAllProducts}}>
+    const DeleteProduct = (id) => {
+       setProducts(products.filter( (p) => p.id != id))
+    }
+    
+    return <GlobalContext.Provider value={{products , setProducts , name , fetchAllProducts , DeleteProduct}}>
          {children}
 
     </GlobalContext.Provider>
