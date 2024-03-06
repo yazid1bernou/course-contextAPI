@@ -4,10 +4,13 @@ import React , {useState , createContext} from "react";
 export const GlobalContext = createContext();
 const Global = ({children}) => {
 
-    const [product , setProduct] = useState("T-shirt") ;
+    const [products , setProducts] = useState([]) ;
     const [name , setName] = useState("adem");
-
-    return <GlobalContext.Provider value={{product , setProduct , name}}>
+    const fetchAllProducts = fetch('https://fakestoreapi.com/products')
+                             .then(res=>res.json())
+                             .then(json=>setProducts(json));
+    
+    return <GlobalContext.Provider value={{products , setProducts , name , fetchAllProducts}}>
          {children}
 
     </GlobalContext.Provider>

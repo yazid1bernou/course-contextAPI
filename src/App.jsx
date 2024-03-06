@@ -1,4 +1,4 @@
-import { useState , useContext } from 'react'
+import { useState , useContext, useEffect } from 'react'
 import Navbar from './components/Navbar';
 import Input from './components/Input';
 import {GlobalContext} from "./contextAPI/Global";
@@ -7,9 +7,12 @@ import { BsEyeFill , BsEyeSlashFill } from "react-icons/bs";
 function App() {
   
  
-  const {product} =  useContext(GlobalContext);   
+  const {products , fetchAllProducts} =  useContext(GlobalContext);   
   const [show , setShow] =  useState(true);
-
+  
+  useEffect( () => {
+      fetchAllProducts
+  } , [])
   return (
     <>
      {/*  <Navbar />
@@ -62,12 +65,21 @@ function App() {
                       </tr>
                     </thead>
                     <tbody>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                      <td>@mdo</td>
-                      <td>@mdo</td>
-                      <td>@mdo</td>
-                      <td>@mdo</td>
+                    {products?.map(({title , description , price , image}) => {
+                            return (
+                             <tr>
+                                <td>1</td>
+                                <td>{title}</td>
+                                <td>{description}</td>
+                                <td>{price}</td>
+                                <td><img src={image} style={{ width : "50px"}} /></td>
+                                <td><button type="button" class="btn btn-danger">Delete</button></td> 
+                             </tr>
+                            )
+
+                    }
+                    )}
+                    
                     </tbody>
               </table>
                
